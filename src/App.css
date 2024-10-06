@@ -1,0 +1,168 @@
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.search-bar {
+  border-radius: 25px;
+  padding: 10px 10px 10px 20px;
+  width: 260px;
+  margin: 25px auto;
+  border-style: none;
+}
+
+#search-icon {
+  margin-top: -6px;
+  margin-left: -40px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  /* after video */
+  z-index: 1;
+  position: relative;
+}
+
+.column-1 {
+  position: relative;
+  color: white;
+  margin: auto;
+}
+
+.weather-container {
+  height: 620px;
+  width: 750px;
+  background-color: rgb(0, 0, 0, 0.2);
+  border-radius: 25px;
+}
+
+.header-details {
+  display: flex;
+  align-items: center;
+}
+
+.header-details img {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.weather-details {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  color: white;
+  z-index: 2;
+  padding: 20px;
+}
+
+.weather-details p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+#temp {
+  font-size: 120px;
+  margin-left: 400px;
+}
+
+#bonus-temp {
+  margin-left: 400px;
+}
+
+#temp-text {
+  font-size: 45px;
+  margin-top: 10px;
+}
+
+.weather-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: rgb(0, 0, 0, 0.2);
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+.weather-icons small {
+  margin: 25px auto;
+  text-align: center;
+}
+
+.updated-info {
+  margin-top: -20px;
+  margin-left: 470px;
+}
+
+.column-2 {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  padding: 20px;
+  color: white;
+  width: 500px;
+}
+
+.hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.hourly-forecast {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.week {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.weekly-forecast {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-wrap: nowrap;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  min-width: 100px;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.weekly-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+footer {
+  padding: 20px;
+  text-align: right;
+  margin-right: 40px;
+  color: white;
+}
