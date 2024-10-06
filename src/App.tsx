@@ -109,9 +109,9 @@ function App() {
     }
   };
 
-  function getFormattedDate(dateJson: string): string {
+  function getFormattedDateTime(dateJson: string, format: string): string {
     const date = new Date(dateJson);
-
+  
     const daysOfWeek = [
       "Sunday",
       "Monday",
@@ -124,53 +124,21 @@ function App() {
     const dayOfWeek = daysOfWeek[date.getDay()];
     const day = date.getDate().toString().padStart(2, "0");
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
-
-    return `${dayOfWeek}, ${day}.${month}.`;
-  }
-
-  function getFormattedDay(dateJson: string): string {
-    const date = new Date(dateJson);
-
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const dayOfWeek = daysOfWeek[date.getDay()];
-
-    return `${dayOfWeek}`;
-  }
-
-  function getFormattedHour(hourJson: string): string {
-    const date = new Date(hourJson);
-
     const hour = date.getHours().toString().padStart(2, "0");
     const minute = date.getMinutes().toString().padStart(2, "0");
-
-    return `${hour}:${minute}`;
-  }
-
-  function getFormattedAlert(alertJson: string): string {
-    const date = new Date(alertJson);
-
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const dayOfWeek = daysOfWeek[date.getDay()];
-    const hour = date.getHours().toString().padStart(2, "0");
-    const minute = date.getMinutes().toString().padStart(2, "0");
-
-    return `${dayOfWeek} ${hour}:${minute}`;
+  
+    switch (format) {
+      case 'date':
+        return `${dayOfWeek}, ${day}.${month}.`;
+      case 'day':
+        return `${dayOfWeek}`;
+      case 'hour':
+        return `${hour}:${minute}`;
+      case 'alert':
+        return `${dayOfWeek} ${hour}:${minute}`;
+      default:
+        return '';
+    }
   }
 
   return (
@@ -196,7 +164,7 @@ function App() {
                     {weatherData.location.country}
                   </h3>
                 </div>
-                <p>{getFormattedDate(weatherData.location.localtime)}</p>
+                <p>{getFormattedDateTime(weatherData.location.localtime, "date")}</p>
                 <p id="temp">{Math.round(weatherData.current.temp_c)}°</p>
                 <p id="bonus-temp">
                   {Math.round(
@@ -229,11 +197,11 @@ function App() {
                       </div>
                       <p>
                         {weatherData.alerts.alert[0].severity} warning from{" "}
-                        {getFormattedAlert(
-                          weatherData.alerts.alert[0].effective
+                        {getFormattedDateTime(
+                          weatherData.alerts.alert[0].effective, "alert"
                         )}{" "}
                         until{" "}
-                        {getFormattedAlert(weatherData.alerts.alert[0].expires)}
+                        {getFormattedDateTime(weatherData.alerts.alert[0].expires, "alert")}
                       </p>
                     </>
                   ) : (
@@ -243,7 +211,7 @@ function App() {
 
                 <div className="updated-info">
                   <small>
-                    Updated {getFormattedHour(weatherData.current.last_updated)}
+                    Updated {getFormattedDateTime(weatherData.current.last_updated, "hour")}
                   </small>
                 </div>
               </div>
@@ -301,7 +269,7 @@ function App() {
                 .map((hourData, index) => {
                   return (
                     <div key={index} className="hour">
-                      <small>{getFormattedHour(hourData.time)}</small>
+                      <small>{getFormattedDateTime(hourData.time, "hour")}</small>
                       <img
                         src={`https:${hourData.condition.icon}`}
                         alt={hourData.condition.text}
@@ -340,7 +308,7 @@ function App() {
                           {" "}
                           {today === dayData.date
                             ? "Today"
-                            : getFormattedDay(dayData.date)}
+                            : getFormattedDateTime(dayData.date, "day")}
                         </td>
                         <td>
                           {" "}
