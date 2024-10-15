@@ -33,7 +33,7 @@ body {
 .container {
   display: flex;
   justify-content: center;
-  /* after video */
+  /* After video */
   z-index: 1;
   position: relative;
 }
@@ -62,7 +62,6 @@ body {
 }
 
 .weather-details {
-  position: absolute;
   top: 30px;
   left: 50px;
   color: white;
@@ -128,12 +127,37 @@ body {
   border-radius: 10px;
 }
 
+.hourly-forecast-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 .hourly-forecast {
   display: flex;
   flex-direction: row;
   gap: 20px;
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: hidden;
+}
+
+.arrow {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+}
+
+.left-arrow {
+  left: -10px;
+}
+
+.right-arrow {
+  right: -10px;
 }
 
 .week {
