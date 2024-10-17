@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { WeatherData } from "../types/WeatherData";
 
 interface CurrentWeatherProps {
   weatherData: WeatherData | null;
   getFormattedDateTime: (dateJson: string, format: string) => string;
+  isCelsius: boolean;
 }
 
 const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   weatherData,
   getFormattedDateTime,
+  isCelsius,
 }) => {
   if (!weatherData) return "";
 
@@ -28,12 +30,41 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
             </h3>
           </div>
           <p>{getFormattedDateTime(weatherData.location.localtime, "date")}</p>
-          <p id="temp">{Math.round(weatherData.current.temp_c)}°</p>
-          <p id="bonus-temp">
-            {Math.round(weatherData.forecast.forecastday[0].day.mintemp_c)}° /{" "}
-            {Math.round(weatherData.forecast.forecastday[0].day.maxtemp_c)}°
-            Feels like {Math.round(weatherData.current.feelslike_c)}°
+          <p id="temp">
+            {Math.round(
+              isCelsius
+                ? weatherData.current.temp_c
+                : weatherData.current.temp_f
+            )}
+            °
           </p>
+          <p id="bonus-temp">
+            {Math.round(
+              isCelsius
+                ? weatherData.forecast.forecastday[0].day.mintemp_c
+                : weatherData.forecast.forecastday[0].day.mintemp_f
+            )}
+            ° /{" "}
+            {Math.round(
+              isCelsius
+                ? weatherData.forecast.forecastday[0].day.maxtemp_c
+                : weatherData.forecast.forecastday[0].day.maxtemp_f
+            )}
+            ° Feels like{" "}
+            {Math.round(
+              isCelsius
+                ? weatherData.current.feelslike_c
+                : weatherData.current.feelslike_f
+            )}
+            °
+          </p>
+
+          <div className="updated-info">
+            <small>
+              Updated{" "}
+              {getFormattedDateTime(weatherData.current.last_updated, "hour")}
+            </small>
+          </div>
 
           <p id="temp-text">
             {weatherData.current.condition.text}{" "}
@@ -57,7 +88,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
                   />
                   <p>{weatherData.alerts.alert[0].headline}</p>
                 </div>
-                <p>
+                <p id="alert-description">
                   {weatherData.alerts.alert[0].severity} warning from{" "}
                   {getFormattedDateTime(
                     weatherData.alerts.alert[0].effective,
@@ -74,29 +105,28 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
               "No alerts found for this location."
             )}
           </p>
-
-          <div className="updated-info">
-            <small>
-              Updated{" "}
-              {getFormattedDateTime(weatherData.current.last_updated, "hour")}
-            </small>
-          </div>
         </div>
       </div>
       <div className="weather-icons">
         <small>
           <img src="/sun.png" height="20" width="20" alt="UV index icon" />
-          UV index
+          <span>UV index</span>
           <br /> {weatherData.current.uv}
         </small>
         <small>
           <img src="/wind.png" height="20" width="20" alt="Wind icon" />
-          Wind
-          <br /> {Math.round(weatherData.current.wind_kph)} km/h
+          <span>Wind</span>
+          <br />{" "}
+          {Math.round(
+            isCelsius
+              ? weatherData.current.wind_kph
+              : weatherData.current.wind_mph
+          )}{" "}
+          {isCelsius ? "km/h" : "mph"}
         </small>
         <small>
           <img src="/humidity.png" height="20" width="20" alt="Humidity icon" />
-          Humidity
+          <span>Humidity</span>
           <br /> {weatherData.current.humidity}%
         </small>
         <small>
@@ -106,9 +136,14 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
             width="20"
             alt="Precipitation icon"
           />
-          Precipitation
+          <span>Precipitation</span>
           <br />
-          {Math.round(weatherData.current.precip_mm)} mm
+          {Math.round(
+            isCelsius
+              ? weatherData.current.precip_mm
+              : weatherData.current.precip_in
+          )}{" "}
+          {isCelsius ? "mm" : "in"}
         </small>
         <small>
           <img
@@ -117,13 +152,23 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
             width="20"
             alt="Dew point icon"
           />
-          Dew point
-          <br /> {Math.round(weatherData.current.dewpoint_c)}°
+          <span>Dew point</span>
+          <br />{" "}
+          {Math.round(
+            isCelsius
+              ? weatherData.current.dewpoint_c
+              : weatherData.current.dewpoint_f
+          )}
+          °
         </small>
         <small>
           <img src="/pressure.png" height="20" width="20" alt="Pressure icon" />
-          Pressure
-          <br /> {weatherData.current.pressure_mb} mb
+          <span>Pressure</span>
+          <br />{" "}
+          {isCelsius
+            ? weatherData.current.pressure_mb
+            : weatherData.current.pressure_in}{" "}
+          {isCelsius ? "mb" : "in"}
         </small>
         <small>
           <img
@@ -132,8 +177,12 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
             width="20"
             alt="Visibility icon"
           />
-          Visibility
-          <br /> {weatherData.current.vis_km} km
+          <span>Visibility</span>
+          <br />{" "}
+          {isCelsius
+            ? weatherData.current.vis_km
+            : weatherData.current.vis_miles}{" "}
+          {isCelsius ? "km" : "miles"}
         </small>
       </div>
     </div>
