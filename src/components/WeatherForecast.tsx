@@ -1,14 +1,17 @@
+import { useState } from "react";
 import React, { useRef } from "react";
 import { WeatherData } from "../types/WeatherData";
 
 interface WeatherForeastProps {
   weatherData: WeatherData | null;
   getFormattedDateTime: (dateJson: string, format: string) => string;
+  isCelsius: boolean;
 }
 
 const WeatherForecast: React.FC<WeatherForeastProps> = ({
   weatherData,
   getFormattedDateTime,
+  isCelsius,
 }) => {
   const forecastRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +63,12 @@ const WeatherForecast: React.FC<WeatherForeastProps> = ({
                       height="32"
                     />
 
-                    <p>{Math.round(hourData.temp_c)}°C</p>
+                    <p>
+                      {Math.round(
+                        isCelsius ? hourData.temp_c : hourData.temp_f
+                      )}
+                      °
+                    </p>
 
                     <div className="header-details">
                       <img src="/raindrop.png" height="12" width="12"></img>
@@ -118,7 +126,14 @@ const WeatherForecast: React.FC<WeatherForeastProps> = ({
                       ></img>
                     </td>
                     <td>
-                      <p>{Math.round(dayData.day.avgtemp_c)}°</p>
+                      <p id="weekly-avg">
+                        {Math.round(
+                          isCelsius
+                            ? dayData.day.avgtemp_c
+                            : dayData.day.avgtemp_f
+                        )}
+                        °
+                      </p>
                     </td>
                   </tr>
                 </table>
