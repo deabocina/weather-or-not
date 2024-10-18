@@ -2,7 +2,7 @@ import axios from "axios";
 import { WeatherData } from "../types/WeatherData";
 
 export const fetchWeatherData = async (location: string) => {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=89ef5b29ca984904980220558242709&q=${location}&days=7&aqi=no&alerts=yes
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=ef1d8a30c3b24067b46173740241810&q=${location}&days=7&aqi=no&alerts=yes
 `;
 
   try {
