@@ -31,7 +31,7 @@ const Search = ({ onSearchChange, isCelsius, toggleUnits }: Props) => {
     const getSuggestions = async () => {
       try {
         const response = await fetch(
-          `https://api.weatherapi.com/v1/search.json?key=89ef5b29ca984904980220558242709&q=${location}`
+          `https://api.weatherapi.com/v1/search.json?key=ef1d8a30c3b24067b46173740241810&q=${location}`
         );
         const data = await response.json();
         setSuggestions(data);
