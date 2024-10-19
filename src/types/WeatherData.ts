@@ -19,7 +19,7 @@ export interface WeatherData {
     wind_mph: number;
     wind_kph: number;
     wind_degree: number;
-    win_dir: string;
+    wind_dir: string;
     pressure_mb: number;
     pressure_in: number;
     precip_mm: number;
