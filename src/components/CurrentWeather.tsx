@@ -12,7 +12,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   getFormattedDateTime,
   isCelsius,
 }) => {
-  if (!weatherData) return "";
+  if (!weatherData) return null;
 
   return (
     <div className="column-1">
