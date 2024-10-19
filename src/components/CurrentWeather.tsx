@@ -114,7 +114,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
           <br /> {weatherData.current.uv}
         </small>
         <small>
-          <img src="/wind.png" height="20" width="20" alt="Wind icon" />
+          <img src="/wind.png" height="20" width="20" alt="Wind icon" className={`wind-icon ${weatherData.current.wind_dir}`} />
           <span>Wind</span>
           <br />{" "}
           {Math.round(
