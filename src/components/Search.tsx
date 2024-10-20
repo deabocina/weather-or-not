@@ -17,13 +17,13 @@ const Search = ({ onSearchChange, isCelsius, toggleUnits }: Props) => {
   const [suggestions, setSuggestions] = useState<Location[]>([]);
 
   useEffect(() => {
-    if (location === "" || location.length < 3) {
+    if (location === "") {
       onSearchChange("Split");
     }
   }, [location, onSearchChange]);
 
   useEffect(() => {
-    if (location === "") {
+    if (location === "" || location.length < 3) {
       setSuggestions([]);
       return;
     }
