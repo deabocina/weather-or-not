@@ -2,7 +2,7 @@
 ## Project Description
 Weather or Not is a modern weather application built using React, Vite and TypeScript. The app allows users to search for and view real-time weather information for any city. By fetching data from the Weather API, the app provides users with up-to-date weather details, making it a reliable tool for both daily and long-term planning.
 
-![weather-or-not](https://github.com/user-attachments/assets/a0b7f2ee-d7d8-4498-b5fc-fe33d8addb65)
+![weather-or-not](https://github.com/user-attachments/assets/785c718f-4d6b-46b3-8674-9dd7a7242ea7)
 
 ## List of Contents
 - [Project Description](#project-description)
