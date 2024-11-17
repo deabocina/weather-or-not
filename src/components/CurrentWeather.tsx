@@ -12,7 +12,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   getFormattedDateTime,
   isCelsius,
 }) => {
-  if (!weatherData) return "";
+  if (!weatherData) return null;
 
   return (
     <div className="column-1">
@@ -20,7 +20,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         <div className="weather-details">
           <div className="header-details">
             <img
-              src="/location.png"
+              src="/weather-or-not/location.png"
               height="23"
               width="25"
               alt="Location icon"
@@ -81,7 +81,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
               <>
                 <div className="header-details">
                   <img
-                    src="/alert.png"
+                    src="/weather-or-not/alert.png"
                     height="20"
                     width="20"
                     alt="Alert icon"
@@ -109,12 +109,23 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
       </div>
       <div className="weather-icons">
         <small>
-          <img src="/sun.png" height="20" width="20" alt="UV index icon" />
+          <img
+            src="/weather-or-not/sun.png"
+            height="20"
+            width="20"
+            alt="UV index icon"
+          />
           <span>UV index</span>
           <br /> {weatherData.current.uv}
         </small>
         <small>
-          <img src="/wind.png" height="20" width="20" alt="Wind icon" />
+          <img
+            src="/weather-or-not/wind.png"
+            height="20"
+            width="20"
+            alt="Wind icon"
+            className={`wind-icon ${weatherData.current.wind_dir}`}
+          />
           <span>Wind</span>
           <br />{" "}
           {Math.round(
@@ -125,13 +136,18 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
           {isCelsius ? "km/h" : "mph"}
         </small>
         <small>
-          <img src="/humidity.png" height="20" width="20" alt="Humidity icon" />
+          <img
+            src="/weather-or-not/humidity.png"
+            height="20"
+            width="20"
+            alt="Humidity icon"
+          />
           <span>Humidity</span>
           <br /> {weatherData.current.humidity}%
         </small>
         <small>
           <img
-            src="/precipitation.png"
+            src="/weather-or-not/precipitation.png"
             height="20"
             width="20"
             alt="Precipitation icon"
@@ -147,7 +163,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/dew-point.png"
+            src="/weather-or-not/dew-point.png"
             height="20"
             width="20"
             alt="Dew point icon"
@@ -162,7 +178,12 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
           °
         </small>
         <small>
-          <img src="/pressure.png" height="20" width="20" alt="Pressure icon" />
+          <img
+            src="/weather-or-not/pressure.png"
+            height="20"
+            width="20"
+            alt="Pressure icon"
+          />
           <span>Pressure</span>
           <br />{" "}
           {isCelsius
@@ -172,7 +193,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/visibility.png"
+            src="/weather-or-not/visibility.png"
             height="20"
             width="20"
             alt="Visibility icon"

@@ -23,15 +23,21 @@ const Search = ({ onSearchChange, isCelsius, toggleUnits }: Props) => {
   }, [location, onSearchChange]);
 
   useEffect(() => {
-    if (location === "") {
+    if (location === "" || location.length < 3) {
       setSuggestions([]);
       return;
     }
 
     const getSuggestions = async () => {
       try {
+        const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+        if (!apiKey) {
+          console.error("API key is missing.");
+          return;
+        }
+
         const response = await fetch(
-          `https://api.weatherapi.com/v1/search.json?key=ef1d8a30c3b24067b46173740241810&q=${location}`
+          `https://api.weatherapi.com/v1/search.json?key=${apiKey}&q=${location}`
         );
         const data = await response.json();
         setSuggestions(data);
@@ -70,7 +76,7 @@ const Search = ({ onSearchChange, isCelsius, toggleUnits }: Props) => {
               onChange={handleOnSearchChange}
             />
             <img
-              src="/search.png"
+              src="/weather-or-not/search.png"
               id="search-icon"
               width="20"
               height="20"

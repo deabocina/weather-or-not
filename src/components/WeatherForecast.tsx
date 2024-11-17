@@ -71,7 +71,7 @@ const WeatherForecast: React.FC<WeatherForeastProps> = ({
                     </p>
 
                     <div className="header-details">
-                      <img src="/raindrop.png" height="12" width="12"></img>
+                      <img src="/weather-or-not/raindrop.png" height="12" width="12"></img>
                       <small>{hourData.chance_of_rain}%</small>
                     </div>
                   </div>
@@ -110,7 +110,7 @@ const WeatherForecast: React.FC<WeatherForeastProps> = ({
                       {" "}
                       <div className="header-details">
                         <img
-                          src="/raindrop.png"
+                          src="/weather-or-not/raindrop.png"
                           height="12"
                           width="12"
                           alt="Chance of rain"

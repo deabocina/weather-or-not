@@ -67,7 +67,7 @@ function App() {
             !fade && isDayTime ? "fade-in" : "fade-out"
           }`}
         >
-          <source src="/background-day.mp4" type="video/mp4" />
+          <source src="/weather-or-not/background-day.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -80,7 +80,7 @@ function App() {
             !fade && !isDayTime ? "fade-in" : "fade-out"
           }`}
         >
-          <source src="/background-night.mp4" type="video/mp4" />
+          <source src="/weather-or-not/background-night.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
