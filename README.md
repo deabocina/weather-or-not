@@ -4,7 +4,7 @@
 
 By fetching data from the **Weather API**, the app provides users with up-to-date weather details, making it a reliable tool for both daily and long-term planning.
 
-![weather-or-not](https://raw.githubusercontent.com/deabocina/weather-or-not/main/public/screenshots/weather-or-not.png)
+![weather-or-not](https://raw.githubusercontent.com/deabocina/weather-or-not/main/public/screenshots/weather-or-not.jpeg)
 
 ### **🌍 Real-Time Weather Information**
 Get up-to-date weather details instantly.
