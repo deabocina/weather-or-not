@@ -1,26 +1,42 @@
 # Weather or Not☀️
-## Project Description
-Weather or Not is a modern weather application built using React, Vite and TypeScript. The app allows users to search for and view real-time weather information for any city. By fetching data from the Weather API, the app provides users with up-to-date weather details, making it a reliable tool for both daily and long-term planning.
 
-![weather-or-not](https://github.com/user-attachments/assets/549f1df6-439f-432c-9268-4305261ae238)
+**Weather or Not** is a modern weather application built using **React**, **Vite** and **TypeScript**. The app allows users to search for and view real-time weather information for any city. 
 
-## List of Contents
-- [Project Description](#project-description)
-- [Key Features](#key-features)
+By fetching data from the **Weather API**, the app provides users with up-to-date weather details, making it a reliable tool for both daily and long-term planning.
 
-## Key Features
-- **React, Vite and TypeScript:** The app is developed using modern web technologies like React (for UI components), Vite (for a fast development environment) and TypeScript (for type safety and better code maintenance).
- 
-- **Responsive Design:** The application is fully responsive, ensuring optimal performance and display on various devices including desktops, tablets and mobile phones.
- 
-- **Weather API Integration:** The app pulls real-time weather data directly from the Weather API, ensuring accurate and timely information.
- 
-- **City Search With Suggestions:** As users type in the city name, an auto-suggestion dropdown appears, displaying matching cities. This makes it easier for users to select the correct location quickly.
- 
-- **Dynamic Background Change (Day/Night):** The app's background dynamically changes based on the time of day in the selected city.
- 
-- **Unit Toggle (Celsius/Fahrenheit):** A dedicated button allows users to switch between Celsius and Fahrenheit. Upon switching, the app recalculates and updates all temperature values accordingly.
- 
-- **Current Weather Overview:** Displays the current temperature, weather conditions, potential alerts and more.
- 
-- **Hourly and Weekly Forecasts:** The app provides both hourly and weekly forecasts, allowing users to plan ahead for different timeframes.
+![weather-or-not](https://raw.githubusercontent.com/deabocina/weather-or-not/main/public/screenshots/weather-or-not.png)
+
+### **🌍 Real-Time Weather Information**
+Get up-to-date weather details instantly.
+- View current temperature, weather conditions (sunny, rainy, etc.) and more.
+- Stay informed with accurate, reliable data pulled from the **Weather API**.
+
+### **⏳ Hourly & Weekly Forecasts**
+Plan ahead with detailed forecasts!
+
+- Get an **hourly forecast** to see the weather throughout the day.
+- View the **weekly forecast** to prepare for upcoming weather conditions.
+
+### **🔍 City Search with Auto-Suggestions**
+Find your location quickly!
+
+- Start typing a city name and see auto-suggestions to help you find the right place faster.
+- Make searching for weather data easy and intuitive.
+
+### **🌞 Dynamic Background (Day/Night)**
+Experience a visually immersive weather app!
+
+- The background dynamically adjusts based on the time of day in the selected city.
+- Daytime and nighttime backgrounds enhance the overall atmosphere.
+
+### **🌡️ Temperature Unit Toggle (Celsius/Fahrenheit)**
+Switch between temperature units with ease.
+
+- Toggle between Celsius and Fahrenheit anytime to suit your preference.
+- All temperature data automatically updates to reflect your selection.
+
+### **📱 Fully Responsive Design**
+Whether on a desktop or mobile device, the app adjusts to your screen.
+
+- Optimized for all devices, ensuring you can access weather data anytime, anywhere.
+- Stay connected and prepared no matter the device you're using.

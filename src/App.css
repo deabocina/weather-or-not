@@ -377,8 +377,6 @@ footer:hover {
   transform: translateY(-10px);
 }
 
-/* MOBILE STYLES */
-
 @media (max-width: 768px) {
   .search-container {
     flex-direction: column;

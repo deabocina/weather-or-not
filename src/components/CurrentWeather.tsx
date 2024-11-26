@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { icons } from "../assets/assets";
 import { WeatherData } from "../types/WeatherData";
 
 interface CurrentWeatherProps {
@@ -20,7 +21,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         <div className="weather-details">
           <div className="header-details">
             <img
-              src="/weather-or-not/location.png"
+              src={icons.location}
               height="23"
               width="25"
               alt="Location icon"
@@ -81,7 +82,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
               <>
                 <div className="header-details">
                   <img
-                    src="/weather-or-not/alert.png"
+                    src={icons.alert}
                     height="20"
                     width="20"
                     alt="Alert icon"
@@ -109,18 +110,13 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
       </div>
       <div className="weather-icons">
         <small>
-          <img
-            src="/weather-or-not/sun.png"
-            height="20"
-            width="20"
-            alt="UV index icon"
-          />
+          <img src={icons.sun} height="20" width="20" alt="UV index icon" />
           <span>UV index</span>
           <br /> {weatherData.current.uv}
         </small>
         <small>
           <img
-            src="/weather-or-not/wind.png"
+            src={icons.wind}
             height="20"
             width="20"
             alt="Wind icon"
@@ -137,7 +133,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/weather-or-not/humidity.png"
+            src={icons.humidity}
             height="20"
             width="20"
             alt="Humidity icon"
@@ -147,7 +143,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/weather-or-not/precipitation.png"
+            src={icons.precipitation}
             height="20"
             width="20"
             alt="Precipitation icon"
@@ -163,7 +159,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/weather-or-not/dew-point.png"
+            src={icons.dewPoint}
             height="20"
             width="20"
             alt="Dew point icon"
@@ -179,7 +175,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/weather-or-not/pressure.png"
+            src={icons.pressure}
             height="20"
             width="20"
             alt="Pressure icon"
@@ -193,7 +189,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
         </small>
         <small>
           <img
-            src="/weather-or-not/visibility.png"
+            src={icons.visibility}
             height="20"
             width="20"
             alt="Visibility icon"

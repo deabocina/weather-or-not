@@ -1,4 +1,5 @@
 {
+  "homepage": "https://deabocina.github.io/weather-or-not/",
   "name": "weather-or-not",
   "private": true,
   "version": "0.0.0",
@@ -8,8 +9,7 @@
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "npx tsc && vite build",
-    "preview": "vite preview",
-    "homepage": "https://deabocina.github.io/weather-or-not/"
+    "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.7.7",

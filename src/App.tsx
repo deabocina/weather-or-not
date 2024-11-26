@@ -1,5 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import dayVideo from "./assets/backgrounds/background-day.mp4";
+import nightVideo from "./assets/backgrounds/background-night.mp4";
 import { WeatherData } from "./types/WeatherData";
 import { getFormattedDateTime } from "./utils/dateUtils";
 import Search from "./components/Search";
@@ -67,7 +69,7 @@ function App() {
             !fade && isDayTime ? "fade-in" : "fade-out"
           }`}
         >
-          <source src="/weather-or-not/background-day.mp4" type="video/mp4" />
+          <source src={dayVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -80,7 +82,7 @@ function App() {
             !fade && !isDayTime ? "fade-in" : "fade-out"
           }`}
         >
-          <source src="/weather-or-not/background-night.mp4" type="video/mp4" />
+          <source src={nightVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

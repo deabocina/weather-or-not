@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { icons } from "../assets/assets";
 
 interface Props {
   onSearchChange: (location: string) => void;
@@ -76,7 +77,7 @@ const Search = ({ onSearchChange, isCelsius, toggleUnits }: Props) => {
               onChange={handleOnSearchChange}
             />
             <img
-              src="/weather-or-not/search.png"
+              src={icons.search}
               id="search-icon"
               width="20"
               height="20"
