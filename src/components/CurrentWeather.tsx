@@ -14,6 +14,15 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   isCelsius,
 }) => {
   if (!weatherData) return null;
+  const locationName = weatherData.location.name.toLowerCase();
+  const regionName = weatherData.location.region.toLowerCase();
+
+  const relevantAlerts = weatherData.alerts.alert.filter((alert) => {
+    return (
+      alert.headline.toLowerCase().includes(locationName) ||
+      alert.headline.toLowerCase().includes(regionName)
+    );
+  });
 
   return (
     <div className="column-1">
@@ -78,7 +87,7 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
           </p>
 
           <p>
-            {weatherData.alerts.alert && weatherData.alerts.alert.length > 0 ? (
+            {relevantAlerts && relevantAlerts.length > 0 ? (
               <>
                 <div className="header-details">
                   <img
@@ -87,19 +96,13 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
                     width="20"
                     alt="Alert icon"
                   />
-                  <p>{weatherData.alerts.alert[0].headline}</p>
+                  <p>{relevantAlerts[0].headline}</p>
                 </div>
                 <p id="alert-description">
-                  {weatherData.alerts.alert[0].severity} warning from{" "}
-                  {getFormattedDateTime(
-                    weatherData.alerts.alert[0].effective,
-                    "alert"
-                  )}{" "}
+                  {relevantAlerts[0].severity} warning from{" "}
+                  {getFormattedDateTime(relevantAlerts[0].effective, "alert")}{" "}
                   until{" "}
-                  {getFormattedDateTime(
-                    weatherData.alerts.alert[0].expires,
-                    "alert"
-                  )}
+                  {getFormattedDateTime(relevantAlerts[0].expires, "alert")}
                 </p>
               </>
             ) : (
