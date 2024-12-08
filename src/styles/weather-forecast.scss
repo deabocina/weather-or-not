@@ -54,7 +54,7 @@ $arrow-button-backgorund: rgba(0, 0, 0, 0.3);
 
   &:hover {
     background-color: $primary-text-colour;
-    color: arrow-button-text-colour;
+    color: $arrow-button-text-colour;
     transition: 0.5s ease-in-out;
   }
 }
