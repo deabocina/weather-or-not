@@ -1,3 +1,4 @@
+import "../styles/search.scss"
 import { useEffect, useState } from "react";
 import { icons } from "../assets/assets";
 

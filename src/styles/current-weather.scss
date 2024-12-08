@@ -1,0 +1,207 @@
+$primary-text-colour: white;
+$secondary-text-colour: rgb(180, 178, 178);
+$background-colour: rgb(0, 0, 0, 0.2);
+
+.column-1 {
+  position: relative;
+  color: $primary-text-colour;
+  margin: auto;
+}
+
+.weather-container {
+  height: 650px;
+  width: 750px;
+  background-color: $background-colour;
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.header-details {
+  display: flex;
+  align-items: center;
+
+  h3 {
+    transition: transform 0.2s ease;
+  }
+
+  img {
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+}
+
+.weather-details {
+  top: 30px;
+  left: 50px;
+  color: $primary-text-colour;
+  z-index: 2;
+  padding: 20px;
+
+  p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+}
+
+#temp {
+  font-size: 120px;
+  margin-left: 400px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+#bonus-temp {
+  margin-left: 400px;
+}
+
+#temp-text {
+  font-size: 45px;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+#alert-description {
+  color: $secondary-text-colour;
+  font-size: 15px;
+  margin-left: 30px;
+}
+
+.weather-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background-color: $background-colour;
+  border-radius: 15px;
+  margin-top: 20px;
+  padding: 10px;
+
+  img {
+    margin-right: 5px;
+    margin-bottom: 3px;
+  }
+
+  small {
+    margin: 25px auto;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  span {
+    color: $secondary-text-colour;
+    font-size: 12px;
+  }
+}
+
+.wind-icon {
+  transition: transform 0.5s ease;
+
+  &.N {
+    transform: rotate(0deg);
+  }
+
+  &.NE {
+    transform: rotate(45deg);
+  }
+
+  &.E {
+    transform: rotate(90deg);
+  }
+
+  &.SE {
+    transform: rotate(135deg);
+  }
+
+  &.S {
+    transform: rotate(180deg);
+  }
+
+  &.SW {
+    transform: rotate(225deg);
+  }
+
+  &.W {
+    transform: rotate(270deg);
+  }
+
+  &.NW {
+    transform: rotate(315deg);
+  }
+
+  &.ESE {
+    transform: rotate(112.5deg);
+  }
+
+  &.SSE {
+    transform: rotate(157.5deg);
+  }
+
+  &.SSW {
+    transform: rotate(202.5deg);
+  }
+
+  &.WSW {
+    transform: rotate(247.5deg);
+  }
+
+  &.NNE {
+    transform: rotate(22.5deg);
+  }
+
+  &.NNW {
+    transform: rotate(337.5deg);
+  }
+}
+
+.updated-info {
+  margin-top: 20px;
+  text-align: right;
+  color: $secondary-text-colour;
+}
+
+@media (max-width: 768px) {
+  .column-1 {
+    width: 100%;
+  }
+
+  .weather-container {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  #temp {
+    font-size: 80px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  #bonus-temp {
+    margin-left: -10px;
+  }
+
+  #temp-text {
+    font-size: 30px;
+    text-align: center;
+    padding: 50px 0 10px 0;
+  }
+
+  .header-details {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #alert-description {
+    margin-left: 0;
+  }
+}

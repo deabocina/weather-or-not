@@ -1,3 +1,4 @@
+import "../styles/current-weather.scss"
 import React from "react";
 import { icons } from "../assets/assets";
 import { WeatherData } from "../types/WeatherData";

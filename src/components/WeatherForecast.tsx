@@ -1,3 +1,4 @@
+import "../styles/weather-forecast.scss"
 import React, { useRef } from "react";
 import { icons } from "../assets/assets";
 import { WeatherData } from "../types/WeatherData";
