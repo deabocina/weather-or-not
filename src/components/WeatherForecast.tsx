@@ -1,4 +1,4 @@
-import "../styles/weather-forecast.scss"
+import "../styles/weather-forecast.scss";
 import React, { useRef } from "react";
 import { icons } from "../assets/assets";
 import { WeatherData } from "../types/WeatherData";
@@ -40,44 +40,42 @@ const WeatherForecast: React.FC<WeatherForeastProps> = ({
           {"<"}
         </button>
         <div className="hourly-forecast" ref={forecastRef}>
-          {weatherData?.forecast.forecastday[0].hour &&
-            Array.isArray(weatherData.forecast.forecastday[0].hour) &&
-            weatherData.forecast.forecastday
-              .flatMap((forecastDay) => forecastDay.hour)
-              .filter((hourData) => {
-                const currentDateTime = new Date();
-                const hourDateTime = new Date(hourData.time);
+          {weatherData?.forecast.forecastday &&
+            (() => {
+              const allHours = weatherData.forecast.forecastday.flatMap(
+                (day) => day.hour
+              );
+              const now = new Date();
+              const currentTimeEpoch = Math.floor(now.getTime() / 1000); // UNIX Timestamp
 
-                const hoursDifference =
-                  (hourDateTime.getTime() - currentDateTime.getTime()) /
-                  (1000 * 60 * 60);
-                return hoursDifference >= 0 && hoursDifference < 24;
-              })
-              .map((hourData, index) => {
-                return (
-                  <div key={index} className="hour">
-                    <small>{getFormattedDateTime(hourData.time, "hour")}</small>
-                    <img
-                      src={`https:${hourData.condition.icon}`}
-                      alt={hourData.condition.text}
-                      width="32"
-                      height="32"
-                    />
+              const startIndex = allHours.findIndex(
+                (hourData) => hourData.time_epoch >= currentTimeEpoch
+              );
 
-                    <p>
-                      {Math.round(
-                        isCelsius ? hourData.temp_c : hourData.temp_f
-                      )}
-                      °
-                    </p>
+              const hoursToShow =
+                startIndex !== -1
+                  ? allHours.slice(startIndex, startIndex + 24)
+                  : allHours.slice(0, 24);
 
-                    <div className="header-details">
-                      <img src={icons.raindrop} height="12" width="12"></img>
-                      <small>{hourData.chance_of_rain}%</small>
-                    </div>
+              return hoursToShow.map((hourData, index) => (
+                <div key={index} className="hour">
+                  <small>{getFormattedDateTime(hourData.time, "hour")}</small>
+                  <img
+                    src={`https:${hourData.condition.icon}`}
+                    alt={hourData.condition.text}
+                    width="32"
+                    height="32"
+                  />
+                  <p>
+                    {Math.round(isCelsius ? hourData.temp_c : hourData.temp_f)}°
+                  </p>
+                  <div className="header-details">
+                    <img src={icons.raindrop} height="12" width="12" />
+                    <small>{hourData.chance_of_rain}%</small>
                   </div>
-                );
-              })}
+                </div>
+              ));
+            })()}
         </div>
 
         <button className="arrow right-arrow" onClick={scrollRight}>

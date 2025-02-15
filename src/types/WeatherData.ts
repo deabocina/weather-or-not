@@ -57,6 +57,7 @@ export interface WeatherData {
           sunset: string;
         };
         hour: {
+          time_epoch: number;
           time: string;
           temp_c: number;
           temp_f: number;
