@@ -3,145 +3,75 @@ import React, { useRef } from "react";
 import { icons } from "../assets/assets";
 import { WeatherData } from "../types/WeatherData";
 
-interface WeatherForeastProps {
+interface WeatherForecastProps {
   weatherData: WeatherData | null;
   getFormattedDateTime: (dateJson: string, format: string) => string;
   isCelsius: boolean;
 }
 
-const WeatherForecast: React.FC<WeatherForeastProps> = ({
+const WeatherForecast: React.FC<WeatherForecastProps> = ({
   weatherData,
   getFormattedDateTime,
   isCelsius,
 }) => {
   const forecastRef = useRef<HTMLDivElement>(null);
 
-  const scrollLeft = () => {
-    if (forecastRef.current) {
-      forecastRef.current.scrollBy({
-        left: -300,
-        behavior: "smooth",
-      });
-    }
-  };
+  const scrollLeft = () => forecastRef.current?.scrollBy({ left: -250, behavior: 'smooth' });
+  const scrollRight = () => forecastRef.current?.scrollBy({ left: 250, behavior: 'smooth' });
 
-  const scrollRight = () => {
-    if (forecastRef.current) {
-      forecastRef.current.scrollBy({
-        left: 300,
-        behavior: "smooth",
-      });
-    }
-  };
+  if (!weatherData) return null;
+
+  const allHours = weatherData.forecast.forecastday.flatMap(d => d.hour);
+  const now = new Date();
+  const startIndex = allHours.findIndex(h => h.time_epoch >= Math.floor(now.getTime() / 1000));
+  const hoursToShow = startIndex !== -1 ? allHours.slice(startIndex, startIndex + 24) : allHours.slice(0,24);
+
   return (
-    <div className="column-2">
-      <div className="hourly-forecast-wrapper">
-        <button className="arrow left-arrow" onClick={scrollLeft}>
-          {"<"}
-        </button>
-        <div className="hourly-forecast" ref={forecastRef}>
-          {weatherData?.forecast.forecastday &&
-            (() => {
-              const allHours = weatherData.forecast.forecastday.flatMap(
-                (day) => day.hour
-              );
-              const now = new Date();
-              const currentTimeEpoch = Math.floor(now.getTime() / 1000); // UNIX Timestamp
-
-              const startIndex = allHours.findIndex(
-                (hourData) => hourData.time_epoch >= currentTimeEpoch
-              );
-
-              const hoursToShow =
-                startIndex !== -1
-                  ? allHours.slice(startIndex, startIndex + 24)
-                  : allHours.slice(0, 24);
-
-              return hoursToShow.map((hourData, index) => (
-                <div key={index} className="hour">
-                  <small>{getFormattedDateTime(hourData.time, "hour")}</small>
-                  <img
-                    src={`https:${hourData.condition.icon}`}
-                    alt={hourData.condition.text}
-                    width="32"
-                    height="32"
-                  />
-                  <p>
-                    {Math.round(isCelsius ? hourData.temp_c : hourData.temp_f)}°
-                  </p>
-                  <div className="header-details">
-                    <img src={icons.raindrop} height="12" width="12" />
-                    <small>{hourData.chance_of_rain}%</small>
-                  </div>
-                </div>
-              ));
-            })()}
-        </div>
-
-        <button className="arrow right-arrow" onClick={scrollRight}>
-          {">"}
-        </button>
+    <div className="weather-card forecast-card">
+      <div className="weather-header">
+        <h3>Forecast</h3>
       </div>
 
-      <div className="weekly-forecast">
-        {weatherData?.forecast.forecastday &&
-          Array.isArray(weatherData.forecast.forecastday) &&
-          weatherData.forecast.forecastday.map((dayData, index) => {
-            const today = new Date().toISOString().split("T")[0];
-
-            return (
-              <div key={index} className="week">
-                <table className="weekly-table">
-                  <colgroup>
-                    <col style={{ width: "35%" }} />
-                    <col style={{ width: "25%" }} />
-                    <col style={{ width: "25%" }} />
-                    <col style={{ width: "25%" }} />
-                  </colgroup>
-                  <tr>
-                    <td>
-                      {" "}
-                      {today === dayData.date
-                        ? "Today"
-                        : getFormattedDateTime(dayData.date, "day")}
-                    </td>
-                    <td>
-                      {" "}
-                      <div className="header-details">
-                        <img
-                          src={icons.raindrop}
-                          height="12"
-                          width="12"
-                          alt="Chance of rain"
-                        ></img>
-                        <small>{dayData.day.daily_chance_of_rain}%</small>
-                      </div>
-                    </td>
-                    <td>
-                      {" "}
-                      <img
-                        src={`https:${dayData.day.condition.icon}`}
-                        alt={dayData.day.condition.text}
-                      ></img>
-                    </td>
-                    <td>
-                      <p id="weekly-avg">
-                        {Math.round(
-                          isCelsius
-                            ? dayData.day.avgtemp_c
-                            : dayData.day.avgtemp_f
-                        )}
-                        °
-                      </p>
-                    </td>
-                  </tr>
-                </table>
+      <div className="hourly-forecast-wrapper">
+        <button className="arrow left" onClick={scrollLeft}>‹</button>
+        <div className="hourly-list" ref={forecastRef}>
+          {hoursToShow.map((h, idx) => (
+            <div key={idx} className="hour-card">
+              <small>{getFormattedDateTime(h.time, "hour")}</small>
+              <img src={`https:${h.condition.icon}`} alt={h.condition.text} width={40} height={40}/>
+              <p className="temp">{Math.round(isCelsius ? h.temp_c : h.temp_f)}°</p>
+              <div className="rain">
+                <img src={icons.raindrop} width={12} height={12} alt="Rain"/>
+                <small>{h.chance_of_rain}%</small>
               </div>
-            );
-          })}
+            </div>
+          ))}
+        </div>
+        <button className="arrow right" onClick={scrollRight}>›</button>
+      </div>
+
+      <div className="weekly-list">
+        {weatherData.forecast.forecastday.map((day, idx) => {
+          const today = new Date().toISOString().split("T")[0];
+          return (
+            <div key={idx} className="day-card">
+              <div className="day-left">
+                <p className="day-name">{today===day.date ? "Today" : getFormattedDateTime(day.date, "day")}</p>
+                <div className="day-info">
+                  <img src={icons.raindrop} width={12} height={12} alt="Rain chance"/>
+                  <small>{day.day.daily_chance_of_rain}%</small>
+                </div>
+              </div>
+              <div className="day-right">
+                <img src={`https:${day.day.condition.icon}`} alt={day.day.condition.text} width={48} height={48}/>
+                <p className="day-temp">{Math.round(isCelsius ? day.day.avgtemp_c : day.day.avgtemp_f)}°</p>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default WeatherForecast;

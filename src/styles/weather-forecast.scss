@@ -1,166 +1,138 @@
-$primary-text-colour: white;
-$secondary-text-colour: rgb(180, 178, 178);
-$arrow-button-text-colour: black;
-$primary-background-colour: rgb(0, 0, 0, 0.2);
-$secondary-background-colour: rgb(0, 0, 0, 0.1);
-$arrow-button-backgorund: rgba(0, 0, 0, 0.3);
+$white: #fff;
+$secondary: rgba(200, 200, 200, 0.75);
+$glass: rgba(255, 255, 255, 0.08);
+$glow: rgba(0, 255, 226, 0.25);
+$accent: #00ffe2;
 
-.column-2 {
-  background-color: $primary-background-colour;
-  border-radius: 25px;
-  padding: 20px;
-  color: $primary-text-colour;
-  width: 500px;
-}
-
-.hour {
+.forecast-card {
+  max-width: 600px;
+  margin-left: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-width: 100px;
-  padding: 10px;
-  background-color: $secondary-background-colour;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(0.9);
-  }
-}
-
-.hourly-forecast-wrapper {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.hourly-forecast {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  flex-wrap: nowrap;
-  overflow-x: hidden;
-}
-
-.arrow {
-  background-color: $arrow-button-backgorund;
-  border: none;
-  border-radius: 25px;
-  color: $primary-text-colour;
-  font-size: 15px;
-  cursor: pointer;
-  padding: 10px;
-  position: absolute;
-
-  &:hover {
-    background-color: $primary-text-colour;
-    color: $arrow-button-text-colour;
-    transition: 0.5s ease-in-out;
-  }
-}
-
-.left-arrow {
-  left: -25px;
-}
-
-.right-arrow {
-  right: -25px;
-}
-
-.week {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 20px;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(0.9);
-  }
-}
-
-.weekly-forecast {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex-wrap: nowrap;
-  background-color: $secondary-background-colour;
-  border-radius: 10px;
-  min-width: 100px;
-  margin-top: 25px;
-}
-
-.weekly-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#weekly-avg {
-  margin-top: 15px;
-}
-
-footer {
-  padding: 10px;
-  text-align: right;
-  margin-right: 40px;
-  color: $secondary-text-colour;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-10px);
-  }
-}
-
-@media (max-width: 768px) {
-  .column-2 {
-    width: 100%;
-    margin-top: 20px;
-  }
 
   .hourly-forecast-wrapper {
-    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .hourly-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      padding: 25px 0;
+    }
+
+    .hour-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      border-radius: 15px;
+      min-width: 70px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        background: rgba(0, 255, 226, 0.1);
+      }
+
+      small {
+        color: $secondary;
+        font-size: 0.75rem;
+      }
+
+      .temp {
+        font-weight: 600;
+      }
+
+      .rain {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: $secondary;
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      color: $white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:hover {
+        background: $white;
+        color: #000;
+      }
+
+      &.left {
+        left: -10px;
+      }
+      &.right {
+        right: -10px;
+      }
+    }
   }
 
-  .arrow {
-    display: block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 12px;
-    padding: 5px;
-    z-index: 2;
-  }
+  .weekly-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-  .left-arrow {
-    left: 5px;
-  }
+    .day-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 15px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
 
-  .right-arrow {
-    right: 5px;
-  }
+      &:hover {
+        transform: translateY(-4px);
+        background: rgba(0, 255, 226, 0.1);
+      }
 
-  .hourly-forecast,
-  .weekly-forecast {
-    flex-wrap: nowrap;
-  }
+      .day-left {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
 
-  .hour {
-    min-width: 80px;
-  }
+        small {
+          color: $secondary;
+          padding-left: 5px;
+        }
+      }
 
-  .weekly-table {
-    font-size: 12px;
-  }
+      .day-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-  footer {
-    margin-right: 20px;
-    font-size: 14px;
+      .day-temp {
+        font-weight: 600;
+        margin-top: 15px;
+      }
+    }
   }
 }
 
-@media (min-width: 768px) and (max-width: 1400px) {
-  .column-2 {
-    width: 750px;
-    margin-top: 20px;
+@media (max-width: 1024px) {
+  .forecast-card {
+    width: 90%;
+    margin: 30px auto 0;
+    padding: 20px;
+    min-height: 650px;
+    margin-bottom: 30px;
   }
 }

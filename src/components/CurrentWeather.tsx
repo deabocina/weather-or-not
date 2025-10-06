@@ -1,4 +1,4 @@
-import "../styles/current-weather.scss"
+import "../styles/current-weather.scss";
 import React from "react";
 import { icons } from "../assets/assets";
 import { WeatherData } from "../types/WeatherData";
@@ -15,41 +15,61 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
   isCelsius,
 }) => {
   if (!weatherData) return null;
-  const locationName = weatherData.location.name.toLowerCase();
-  const regionName = weatherData.location.region.toLowerCase();
 
-  const relevantAlerts = weatherData.alerts.alert.filter((alert) => {
-    return (
-      alert.headline.toLowerCase().includes(locationName) ||
-      alert.headline.toLowerCase().includes(regionName)
-    );
-  });
+  const alerts = weatherData.alerts.alert || [];
+  const activeAlert = alerts.find((a) =>
+    a.headline.toLowerCase().includes(weatherData.location.name.toLowerCase())
+  );
 
   return (
-    <div className="column-1">
-      <div className="weather-container">
-        <div className="weather-details">
-          <div className="header-details">
-            <img
-              src={icons.location}
-              height="23"
-              width="25"
-              alt="Location icon"
-            />
-            <h3>
-              <b>{weatherData.location.name}</b>, {weatherData.location.country}
-            </h3>
-          </div>
-          <p>{getFormattedDateTime(weatherData.location.localtime, "date")}</p>
-          <p id="temp">
+    <div className="weather-card">
+      <div className="weather-header">
+        <div className="location">
+          <img src={icons.location} alt="Location" width="20" />
+          <h3>
+            {weatherData.location.name}, {weatherData.location.country}
+          </h3>
+        </div>
+        <div className="time-info">
+          <small>
+            {getFormattedDateTime(weatherData.location.localtime, "date")}
+          </small>
+          <small className="updated">
+            Updated{" "}
+            {getFormattedDateTime(weatherData.current.last_updated, "hour")}
+          </small>
+        </div>
+      </div>
+
+      <div className="weather-main">
+        <div className="temp-section">
+          <h1>
             {Math.round(
               isCelsius
                 ? weatherData.current.temp_c
                 : weatherData.current.temp_f
             )}
             °
+          </h1>
+          <p className="feels">
+            Feels like{" "}
+            {Math.round(
+              isCelsius
+                ? weatherData.current.feelslike_c
+                : weatherData.current.feelslike_f
+            )}
+            °
           </p>
-          <p id="bonus-temp">
+        </div>
+        <div className="condition">
+          <img
+            src={`https:${weatherData.current.condition.icon}`}
+            alt={weatherData.current.condition.text}
+            width="72"
+            height="72"
+          />
+          <p>{weatherData.current.condition.text}</p>
+          <small>
             {Math.round(
               isCelsius
                 ? weatherData.forecast.forecastday[0].day.mintemp_c
@@ -61,151 +81,74 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
                 ? weatherData.forecast.forecastday[0].day.maxtemp_c
                 : weatherData.forecast.forecastday[0].day.maxtemp_f
             )}
-            ° Feels like{" "}
-            {Math.round(
-              isCelsius
-                ? weatherData.current.feelslike_c
-                : weatherData.current.feelslike_f
-            )}
             °
-          </p>
-
-          <div className="updated-info">
-            <small>
-              Updated{" "}
-              {getFormattedDateTime(weatherData.current.last_updated, "hour")}
-            </small>
-          </div>
-
-          <p id="temp-text">
-            {weatherData.current.condition.text}{" "}
-            <img
-              src={`https:${weatherData.current.condition.icon}`}
-              alt={weatherData.current.condition.text}
-              width="64"
-              height="64"
-            />
-          </p>
-
-          <p>
-            {relevantAlerts && relevantAlerts.length > 0 ? (
-              <>
-                <div className="header-details">
-                  <img
-                    src={icons.alert}
-                    height="20"
-                    width="20"
-                    alt="Alert icon"
-                  />
-                  <p>{relevantAlerts[0].headline}</p>
-                </div>
-                <p id="alert-description">
-                  {relevantAlerts[0].severity} warning from{" "}
-                  {getFormattedDateTime(relevantAlerts[0].effective, "alert")}{" "}
-                  until{" "}
-                  {getFormattedDateTime(relevantAlerts[0].expires, "alert")}
-                </p>
-              </>
-            ) : (
-              "No alerts found for this location."
-            )}
-          </p>
+          </small>
         </div>
       </div>
-      <div className="weather-icons">
-        <small>
-          <img src={icons.sun} height="20" width="20" alt="UV index icon" />
-          <span>UV index</span>
-          <br /> {weatherData.current.uv}
-        </small>
-        <small>
-          <img
-            src={icons.wind}
-            height="20"
-            width="20"
-            alt="Wind icon"
-            className={`wind-icon ${weatherData.current.wind_dir}`}
-          />
+
+      <div className="weather-stats">
+        <div>
+          <img src={icons.wind} alt="Wind" />
+          <p>
+            {Math.round(
+              isCelsius
+                ? weatherData.current.wind_kph
+                : weatherData.current.wind_mph
+            )}
+            {isCelsius ? " km/h" : " mph"}
+          </p>
           <span>Wind</span>
-          <br />{" "}
-          {Math.round(
-            isCelsius
-              ? weatherData.current.wind_kph
-              : weatherData.current.wind_mph
-          )}{" "}
-          {isCelsius ? "km/h" : "mph"}
-        </small>
-        <small>
-          <img
-            src={icons.humidity}
-            height="20"
-            width="20"
-            alt="Humidity icon"
-          />
+        </div>
+        <div>
+          <img src={icons.humidity} alt="Humidity" />
+          <p>{weatherData.current.humidity}%</p>
           <span>Humidity</span>
-          <br /> {weatherData.current.humidity}%
-        </small>
-        <small>
-          <img
-            src={icons.precipitation}
-            height="20"
-            width="20"
-            alt="Precipitation icon"
-          />
-          <span>Precipitation</span>
-          <br />
-          {Math.round(
-            isCelsius
-              ? weatherData.current.precip_mm
-              : weatherData.current.precip_in
-          )}{" "}
-          {isCelsius ? "mm" : "in"}
-        </small>
-        <small>
-          <img
-            src={icons.dewPoint}
-            height="20"
-            width="20"
-            alt="Dew point icon"
-          />
-          <span>Dew point</span>
-          <br />{" "}
-          {Math.round(
-            isCelsius
-              ? weatherData.current.dewpoint_c
-              : weatherData.current.dewpoint_f
-          )}
-          °
-        </small>
-        <small>
-          <img
-            src={icons.pressure}
-            height="20"
-            width="20"
-            alt="Pressure icon"
-          />
+        </div>
+        <div>
+          <img src={icons.pressure} alt="Pressure" />
+          <p>
+            {isCelsius
+              ? weatherData.current.pressure_mb
+              : weatherData.current.pressure_in}
+            {isCelsius ? " mb" : " in"}
+          </p>
           <span>Pressure</span>
-          <br />{" "}
-          {isCelsius
-            ? weatherData.current.pressure_mb
-            : weatherData.current.pressure_in}{" "}
-          {isCelsius ? "mb" : "in"}
-        </small>
-        <small>
-          <img
-            src={icons.visibility}
-            height="20"
-            width="20"
-            alt="Visibility icon"
-          />
+        </div>
+        <div>
+          <img src={icons.sun} alt="UV" />
+          <p>{weatherData.current.uv}</p>
+          <span>UV Index</span>
+        </div>
+        <div>
+          <img src={icons.precipitation} alt="Precipitation" />
+          <p>
+            {Math.round(
+              isCelsius
+                ? weatherData.current.precip_mm
+                : weatherData.current.precip_in
+            )}
+            {isCelsius ? " mm" : " in"}
+          </p>
+          <span>Precipitation</span>
+        </div>
+        <div>
+          <img src={icons.visibility} alt="Visibility" />
+          <p>
+            {isCelsius
+              ? weatherData.current.vis_km
+              : weatherData.current.vis_miles}
+            {isCelsius ? " km" : " mi"}
+          </p>
           <span>Visibility</span>
-          <br />{" "}
-          {isCelsius
-            ? weatherData.current.vis_km
-            : weatherData.current.vis_miles}{" "}
-          {isCelsius ? "km" : "miles"}
-        </small>
+        </div>
       </div>
+
+      {activeAlert && (
+        <div className="alert-bar">
+          <img src={icons.alert} alt="Alert" width="20" />
+          <p>{activeAlert.headline}</p>
+        </div>
+      )}
     </div>
   );
 };
