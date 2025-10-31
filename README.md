@@ -27,13 +27,6 @@ Find your location quickly!
 - Start typing a city name and see auto-suggestions to help you find the right place faster.
 - Make searching for weather data easy and intuitive.
 
-## **🌞 Dynamic Background (Day/Night)**
-
-Experience a visually immersive weather app!
-
-- The background dynamically adjusts based on the time of day in the selected city.
-- Daytime and nighttime backgrounds enhance the overall atmosphere.
-
 ## **🌡️ Temperature Unit Toggle (Celsius/Fahrenheit)**
 
 Switch between temperature units with ease.
