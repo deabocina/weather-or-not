@@ -136,3 +136,9 @@ $accent: #00ffe2;
     margin-bottom: 30px;
   }
 }
+
+@media (min-width: 1024px) and (max-width: 1220px) {
+  .forecast-card {
+    margin: 30px auto;
+  }
+}

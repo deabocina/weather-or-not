@@ -136,6 +136,8 @@ $accent: #00ffe2;
 
 @media (max-width: 1024px) {
   .weather-card {
+    margin-top: 30px;
+
     .weather-main {
       margin-top: 20px;
       flex-direction: column;
@@ -152,5 +154,11 @@ $accent: #00ffe2;
       align-items: center;
       text-align: center;
     }
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1190px) {
+  .weather-card {
+    margin-top: 30px;
   }
 }
